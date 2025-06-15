@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "953517918365",
+    "project_id": "globalnet-258b5",
+    "storage_bucket": "globalnet-258b5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953517918365:android:8e5cfc511aced8c68aec74",
+        "android_client_info": {
+          "package_name": "com.example.app_berita"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5QJoi-3JJusNvnxsQ8_R30DbpLHDPiYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
