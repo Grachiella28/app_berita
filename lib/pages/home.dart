@@ -38,21 +38,24 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title:
-            Text("GlobalNet", style: TextStyle(fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.black,
         centerTitle: true,
+        automaticallyImplyLeading: false,
+        title: Image.asset(
+          'images/gnet.png', // Pastikan file ini ada di folder assets/images/
+          height: 36,
+        ),
       ),
       body: articles.isEmpty
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: articles.length,
               itemBuilder: (context, index) {
                 final article = articles[index];
-                return NewsCard(
-                  article: article,
-                );
+                return NewsCard(article: article);
               },
             ),
     );

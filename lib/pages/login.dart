@@ -58,11 +58,11 @@ class _LoginState extends State<Login> {
                     fillColor: Colors.white10,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Colors.white10),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.blue, width: 2),
+                      borderSide: BorderSide(color: Colors.white, width: 2),
                     ),
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -96,6 +96,80 @@ class _LoginState extends State<Login> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          final TextEditingController resetEmailController =
+                              TextEditingController();
+
+                          return AlertDialog(
+                            backgroundColor: Colors.grey[900],
+                            title: Text(
+                              "Reset Password",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            content: TextField(
+                              controller: resetEmailController,
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                hintText: "Enter your email",
+                                hintStyle: TextStyle(color: Colors.grey),
+                                filled: true,
+                                fillColor: Colors.grey[850],
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  final email =
+                                      resetEmailController.text.trim();
+                                  if (email.isNotEmpty) {
+                                    try {
+                                      await _authService.sendPasswordReset(
+                                        email,
+                                      );
+                                      Navigator.pop(context);
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            "Reset email sent to $email",
+                                          ),
+                                        ),
+                                      );
+                                    } catch (e) {
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            "Error: ${e.toString()}",
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                },
+                                child: Text(
+                                  "Send",
+                                  style: TextStyle(color: Colors.green),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                       // forgot password logic
                     },
                     child: const Text(
@@ -131,7 +205,9 @@ class _LoginState extends State<Login> {
                       );
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => const BottomNav()),
+                        MaterialPageRoute(
+                          builder: (context) => const BottomNav(),
+                        ),
                       );
                       // Navigator.pushReplacement(...); ← jika sudah punya halaman Home
                     } else {
@@ -174,28 +250,6 @@ class _LoginState extends State<Login> {
                   child: const Text("Create new account"),
                 ),
                 const SizedBox(height: 24),
-
-                // Or continue with
-                const Center(
-                  child: Text(
-                    "Or continue with",
-                    style: TextStyle(color: Colors.blue, fontSize: 14),
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                // Google login
-                Center(
-                  child: IconButton(
-                    onPressed: () {
-                      // Handle Google sign-in
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.google),
-                    iconSize: 32,
-                    color: Colors.white,
-                    splashRadius: 28,
-                  ),
-                ),
               ],
             ),
           ),

@@ -87,6 +87,7 @@ class _ExplorePageState extends State<ExploreScreen> {
         title: const Text("Explore", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black,
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

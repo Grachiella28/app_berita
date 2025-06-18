@@ -19,9 +19,16 @@ class NewsDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text(article['source']['name'] ?? 'News'),
+        title: Text(
+          article['source']['name'] ?? 'News',
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
         centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.white),
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -30,7 +37,7 @@ class NewsDetailPage extends StatelessWidget {
             // Gambar Berita
             if (article['urlToImage'] != null)
               ClipRRect(
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(12)),
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(12)),
                 child: Image.network(
                   article['urlToImage'],
                   width: double.infinity,
@@ -46,37 +53,44 @@ class NewsDetailPage extends StatelessWidget {
                   // Judul
                   Text(
                     article['title'] ?? '',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   // Author dan tanggal
                   Row(
                     children: [
                       if (article['author'] != null)
                         Text(
                           article['author'],
-                          style: TextStyle(fontStyle: FontStyle.italic),
+                          style: const TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.white70,
+                          ),
                         ),
-                      SizedBox(width: 12),
+                      const SizedBox(width: 12),
                       Text(
                         formatDate(article['publishedAt'] ?? ''),
-                        style: TextStyle(color: Colors.grey),
+                        style: const TextStyle(color: Colors.white70),
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   // Deskripsi
                   if (article['description'] != null)
                     Text(
                       article['description'],
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
                     ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   // Konten
                   if (article['content'] != null)
                     Text(
                       article['content'],
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
                     ),
                 ],
               ),

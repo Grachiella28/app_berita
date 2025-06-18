@@ -33,6 +33,7 @@ class BookmarkScreen extends StatelessWidget {
           "Bookmark",
           style: TextStyle(fontWeight: FontWeight.w600),
         ),
+        automaticallyImplyLeading: false,
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance

@@ -46,6 +46,10 @@ class AuthService {
     }
   }
 
+  Future<void> sendPasswordReset(String email) async {
+  await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+}
+
   // 🔐 Common Firebase error handler
   String _handleFirebaseError(FirebaseAuthException e) {
     switch (e.code) {

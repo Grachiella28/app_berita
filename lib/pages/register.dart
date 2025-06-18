@@ -58,11 +58,11 @@ class _RegisterState extends State<Register> {
                     fillColor: Colors.white10,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.blueAccent),
+                      borderSide: const BorderSide(color: Colors.white10),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.blue, width: 2),
+                      borderSide: const BorderSide(color: Colors.white, width: 2),
                     ),
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -102,11 +102,11 @@ class _RegisterState extends State<Register> {
                     fillColor: Colors.white10,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.blueAccent),
+                      borderSide: const BorderSide(color: Colors.white10),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.blue, width: 2),
+                      borderSide: const BorderSide(color: Colors.white, width: 2),
                     ),
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -180,27 +180,6 @@ class _RegisterState extends State<Register> {
                 ),
                 const SizedBox(height: 24),
 
-                // Or continue with
-                const Center(
-                  child: Text(
-                    "Or continue with",
-                    style: TextStyle(color: Colors.blue, fontSize: 14),
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                // Google Button Only
-                Center(
-                  child: IconButton(
-                    onPressed: () {
-                      // TODO: Implement Google Sign-In
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.google),
-                    iconSize: 32,
-                    color: Colors.white,
-                    splashRadius: 28,
-                  ),
-                ),
               ],
             ),
           ),
