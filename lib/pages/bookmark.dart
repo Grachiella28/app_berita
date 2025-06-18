@@ -3,33 +3,36 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../components/newscard.dart';
 
-class BookmarkScreen extends StatefulWidget {
+class BookmarkScreen extends StatelessWidget {
   const BookmarkScreen({super.key});
 
   @override
-  State<BookmarkScreen> createState() => _BookmarkScreenState();
-}
-
-class _BookmarkScreenState extends State<BookmarkScreen> {
-  late final String userId;
-
-  @override
-  void initState() {
-    super.initState();
-    final user = FirebaseAuth.instance.currentUser;
-    userId = user?.uid ?? '';
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (userId.isEmpty) {
-      return const Center(child: Text("User not logged in"));
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+
+    if (userId == null) {
+      return const Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: Text(
+            "Silakan login terlebih dahulu",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
     }
 
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text("Bookmark"),
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
+        title: const Text(
+          "Bookmark",
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -39,30 +42,43 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(color: Colors.white),
+            );
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('Tidak ada berita yang dibookmark'));
+            return const Center(
+              child: Text(
+                "Tidak ada berita yang dibookmark",
+                style: TextStyle(color: Colors.white),
+              ),
+            );
           }
 
           final bookmarks = snapshot.data!.docs;
 
-          return ListView.builder(
+          return ListView.separated(
             padding: const EdgeInsets.all(16),
             itemCount: bookmarks.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 16),
             itemBuilder: (context, index) {
               final data = bookmarks[index].data() as Map<String, dynamic>;
 
-              // Ubah agar bisa dipakai langsung oleh NewsCard
               final article = {
                 'title': data['title'],
                 'urlToImage': data['urlToImage'],
-                'source': {'name': data['source']},
+                'source': {
+                  'name': data['source.name'],
+                },
                 'url': data['url'],
+                'author': data['author'],
+                'description': data['description'],
+                'publishedAt': data['publishedAt'],
+                'content': data['content'],
               };
 
-              return NewsCard(article: article, likes: 0);
+              return NewsCard(article: article);
             },
           );
         },

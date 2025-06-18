@@ -52,7 +52,6 @@ class _HomeState extends State<Home> {
                 final article = articles[index];
                 return NewsCard(
                   article: article,
-                  likes: (index + 1) * 17,
                 );
               },
             ),
