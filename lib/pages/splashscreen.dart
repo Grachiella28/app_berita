@@ -12,12 +12,16 @@ class MySplashScreen extends StatefulWidget {
 
 class _MySplashScreenState extends State<MySplashScreen> {
 
-  startTimer()
-  {
-    Timer(const Duration(seconds: 3), () async {
-       Navigator.push(context, MaterialPageRoute(builder: (c)=> Login()));
-    });
-  }
+  startTimer() {
+  Timer(const Duration(seconds: 3), () async {
+    if (!mounted) return; // Pastikan widget masih terpasang
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (c) => const Login()),
+    );
+  });
+}
+
 
   @override
   void initState() {
@@ -30,7 +34,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
  @override
 Widget build(BuildContext context) {
   return Scaffold(
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.black,
     body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

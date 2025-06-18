@@ -1,6 +1,5 @@
 import 'package:app_berita/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_berita/pages/login.dart';
 
 class Register extends StatefulWidget {

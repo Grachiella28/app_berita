@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_berita/pages/register.dart';
 import 'package:app_berita/services/auth_service.dart';
-import 'package:app_berita/pages/home.dart';
 import 'package:app_berita/navigation/Bottomnav.dart';
 
 class Login extends StatefulWidget {
@@ -226,7 +224,7 @@ class _LoginState extends State<Login> {
                   ),
                   child: const Text(
                     "Sign in",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 12),

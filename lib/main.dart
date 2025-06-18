@@ -1,11 +1,12 @@
-import 'package:app_berita/pages/login.dart';
-import 'package:app_berita/pages/register.dart';
-import 'package:app_berita/pages/splashscreen.dart';
-import 'package:app_berita/navigation/bottomnav.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
+
+// Import halaman
+import 'package:app_berita/pages/login.dart';
+import 'package:app_berita/pages/splashscreen.dart';
+import 'package:app_berita/navigation/bottomnav.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,30 +23,62 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'GlobalNet',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
       debugShowCheckedModeBanner: false,
-      home: const AuthWrapper(), // Cek login status
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
+        colorScheme: ColorScheme.dark().copyWith(
+          primary: Colors.green,
+          secondary: Colors.greenAccent,
+        ),
+      ),
+      home: const SplashAndAuthRouter(),
     );
   }
 }
 
-class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({super.key});
+// Splash screen + Routing berdasarkan login status
+class SplashAndAuthRouter extends StatefulWidget {
+  const SplashAndAuthRouter({super.key});
+
+  @override
+  State<SplashAndAuthRouter> createState() => _SplashAndAuthRouterState();
+}
+
+class _SplashAndAuthRouterState extends State<SplashAndAuthRouter> {
+  bool _showSplash = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Tampilkan splash selama 3 detik
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        _showSplash = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (_showSplash) {
+      return const MySplashScreen();
+    }
+
+    // Setelah splash, cek status login
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const MySplashScreen(); // Sementara loading
+          return const Scaffold(
+            backgroundColor: Colors.black,
+            body: Center(child: CircularProgressIndicator(color: Colors.green)),
+          );
         } else if (snapshot.hasData) {
-          return const BottomNav(); // Sudah login
+          return const BottomNav(); // Jika user sudah login
         } else {
-          return const Login(); // Belum login
+          return const Login(); // Jika belum login
         }
       },
     );

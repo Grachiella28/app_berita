@@ -51,7 +51,7 @@ class BookmarkScreen extends StatelessWidget {
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(
               child: Text(
-                "Tidak ada berita yang dibookmark",
+                "No news has been bookmarked.",
                 style: TextStyle(color: Colors.white),
               ),
             );
