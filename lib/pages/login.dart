@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_berita/pages/register.dart';
 import 'package:app_berita/services/auth_service.dart';
 import 'package:app_berita/pages/home.dart';
+import 'package:app_berita/navigation/Bottomnav.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -130,7 +131,7 @@ class _LoginState extends State<Login> {
                       );
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => const Home()),
+                        MaterialPageRoute(builder: (context) => const BottomNav()),
                       );
                       // Navigator.pushReplacement(...); ← jika sudah punya halaman Home
                     } else {
