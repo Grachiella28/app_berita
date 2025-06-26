@@ -84,4 +84,3 @@ class _SplashAndAuthRouterState extends State<SplashAndAuthRouter> {
     );
   }
 }
-g
