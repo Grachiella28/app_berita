@@ -154,7 +154,7 @@ class _RegisterState extends State<Register> {
                   ),
                   child: const Text(
                     "Sign up",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 12),

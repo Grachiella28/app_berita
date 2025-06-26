@@ -28,7 +28,7 @@ class NewsDetailPage extends StatelessWidget {
         backgroundColor: Colors.black,
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
-        automaticallyImplyLeading: false,
+    
       ),
       body: SingleChildScrollView(
         child: Column(
